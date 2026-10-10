@@ -1,6 +1,6 @@
-# Portfolio Marketplace Backend (Go)
+# Portfolio Backend (Go)
 
-Go REST API for the Portfolio Marketplace. PostgreSQL stores users, templates, portfolios, and projects. The Flutter web and mobile clients connect to this service.
+Go REST API with PostgreSQL-backed user registration and sign-in. Successful registration and sign-in return a JWT and the user profile.
 
 ## Requirements
 
@@ -21,7 +21,21 @@ The current Go app uses environment variables from the process; it does not auto
 make db-up
 ```
 
-The SQL migration is applied automatically when the PostgreSQL data volume is created for the first time. If you change the initial migration and want a fresh local database, run `make db-reset` (this deletes local database data).
+The initial SQL migration creates the users table when the PostgreSQL data volume is created.
+
+To apply a changed initial schema to your local database, run:
+
+```bash
+make db-reset
+```
+
+This deletes the local PostgreSQL volume and all its data, including registered accounts, then recreates the database. You will need to sign up again afterward. Do not use this command if you need to keep the current database data.
+
+## Authentication API
+
+- `POST /api/v1/auth/register` — JSON body: `{"email":"you@example.com","password":"at-least-8-chars","display_name":"Your Name"}`
+- `POST /api/v1/auth/login` — JSON body: `{"email":"you@example.com","password":"your-password"}`
+- `GET /health` — API health check
 
 ## Run the API
 
