@@ -45,3 +45,4 @@ make db-down
 ## Security before deployment
 
 Set a strong unique JWT secret, restrict CORS to your deployed clients, validate all inputs, use HTTPS, configure database credentials securely, and review authorization policies. This starter is an MVP and should not be exposed publicly without a security review.
+# portfolio-BE
